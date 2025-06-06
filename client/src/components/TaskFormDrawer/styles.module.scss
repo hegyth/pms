@@ -1,0 +1,25 @@
+.drawer {
+  width: 400px;
+  padding: 32px;
+}
+
+.title {
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.button {
+  flex: 1;
+}

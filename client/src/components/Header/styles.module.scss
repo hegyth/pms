@@ -1,0 +1,15 @@
+.headerContainer {
+    display: flex; 
+    align-items: center; 
+    padding: 24px 32px 12px 32px;
+    margin-bottom: 0;
+    background-color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navigationContainer  {
+    display: flex;
+    flex: 1;
+    gap: 32px;
+}

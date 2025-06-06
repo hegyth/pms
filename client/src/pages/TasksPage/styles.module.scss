@@ -1,0 +1,49 @@
+.container {
+  padding: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filterField {
+  min-width: 120px;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.taskCard {
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskTags {
+  display: flex;
+  gap: 8px;
+}
+
+.taskDescription {
+  margin-top: 8px;
+}
+
+.taskInfo {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}

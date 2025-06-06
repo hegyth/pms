@@ -1,0 +1,28 @@
+.container {
+  padding: 24px;
+}
+
+.boardList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.boardCard {
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.boardDescription {
+  margin-bottom: 16px;
+}
+
+.boardTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}

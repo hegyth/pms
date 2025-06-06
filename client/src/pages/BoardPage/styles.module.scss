@@ -1,0 +1,79 @@
+.container {
+  padding: 24px;
+}
+
+.boardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.column {
+  padding: 16px;
+  min-height: 500px;
+  background-color: #f5faff;
+  border: 2px solid #1976d2;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.columnTitle {
+  color: #1976d2;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: inherit;
+}
+
+.tasksContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.emptyState {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.taskCard {
+  border-radius: 20px;
+  box-shadow: 0 2px 8px 0 #e3e3e3;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 4px 12px 0 #d3d3d3;
+  }
+}
+
+.taskContent {
+  padding: 16px;
+
+  &:last-child {
+    padding-bottom: 16px;
+  }
+}
+
+.taskTitle {
+  font-weight: 500;
+}
+
+.taskDescription {
+  margin-bottom: 16px;
+}
+
+.taskTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.taskAssignee {
+  margin-top: 16px;
+}
