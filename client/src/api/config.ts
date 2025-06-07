@@ -2,7 +2,9 @@
 import axios from 'axios';
 
 // Базовый URL для API-запросов
-const API_BASE_URL = 'http://localhost:8080/api/v1';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+// const API_BASE_URL = 'http://localhost:8080/api/v1';
 
 // Создаем экземпляр axios с базовыми настройками
 export const api = axios.create({

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate, Navigate } from "react-router-dom";
 import { useBoards, useCreateTask, useUpdateTask, useUsers } from "../../api/hooks";
 import type { Board, Task, User } from "../../api/types";
 import { BoardPage } from "../../pages/BoardPage";
@@ -95,6 +95,7 @@ export function AppContent() {
         <Header onCreate={handleCreateClick} />
         <main>
           <Routes>
+            <Route path="/" element={<Navigate to="/issues" replace />} />
             <Route path="/issues" element={<TasksPage />} />
             <Route path="/boards" element={<BoardsPage />} />
             <Route path="/board/:id" element={<BoardPage onTaskClick={handleTaskClick} />} />

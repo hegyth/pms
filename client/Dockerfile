@@ -1,23 +1,21 @@
-# Используем официальный образ Node.js
-FROM node:18
+FROM node:20-alpine
 
-# Устанавливаем рабочую директорию
+ARG API_URL
+
+ENV VITE_API_BASE_URL=$API_URL
+
 WORKDIR /app
 
-# Копируем package.json и package-lock.json
 COPY package*.json ./
 
-# Устанавливаем зависимости
 RUN npm install
 
-# Копируем исходный код
 COPY . .
 
-# Собираем приложение
-RUN npm run build
+RUN npm run build --force
 
-# Открываем порт
-EXPOSE 3000
+EXPOSE 5175
 
-# Запускаем приложение
-CMD ["npm", "run", "preview"] 
+RUN npm i -g vite
+
+CMD vite preview --port 5175 --host 0.0.0.0

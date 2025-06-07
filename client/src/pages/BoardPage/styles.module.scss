@@ -1,79 +1,86 @@
 .container {
   padding: 24px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .boardGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin-top: 16px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .column {
-  padding: 16px;
-  min-height: 500px;
-  background-color: #f5faff;
-  border: 2px solid #1976d2;
-  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 16px;
+  height: 100%;
+  overflow: hidden;
 }
 
 .columnTitle {
-  color: #1976d2;
-  font-weight: 700;
   margin-bottom: 16px;
-  text-align: center;
-  font-family: inherit;
+  font-weight: 600;
 }
 
 .tasksContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   flex: 1;
-}
-
-.emptyState {
-  text-align: center;
-  margin-top: 16px;
+  overflow-y: auto;
+  padding: 8px;
+  min-height: 100px;
 }
 
 .taskCard {
-  border-radius: 20px;
-  box-shadow: 0 2px 8px 0 #e3e3e3;
-  padding: 8px;
+  margin-bottom: 8px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
 
   &:hover {
-    box-shadow: 0 4px 12px 0 #d3d3d3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &.dragging {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: rotate(2deg);
   }
 }
 
 .taskContent {
-  padding: 16px;
-
-  &:last-child {
-    padding-bottom: 16px;
-  }
+  padding: 12px !important;
 }
 
 .taskTitle {
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 1rem;
 }
 
 .taskDescription {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .taskTags {
+  margin-bottom: 8px;
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
 }
 
 .taskAssignee {
-  margin-top: 16px;
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 16px;
+  color: #666;
 }

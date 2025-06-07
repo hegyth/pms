@@ -32,6 +32,9 @@ interface TaskDrawerProps {
   onGoToBoard?: (boardId: number) => void; // Функция для перехода на доску
 }
 
+// Ключ для localStorage
+const TASK_FORM_STORAGE_KEY = 'taskFormData';
+
 // Компонент формы задачи
 export function TaskDrawer(props: TaskDrawerProps) {
   const { open, onClose, mode, task, boards, users, onSubmit, onGoToBoard } = props;
@@ -45,7 +48,38 @@ export function TaskDrawer(props: TaskDrawerProps) {
   const [status, setStatus] = useState<TaskStatus>(TASK_STATUSES[0].value);
   const [assigneeId, setAssigneeId] = useState<number | ''>('');
 
-  // Эффект для заполнения формы данными задачи при редактировании
+  // Функция для сохранения данных формы в localStorage
+  const saveFormData = () => {
+    if (!isEdit) {
+      const formData = {
+        title,
+        description,
+        boardId,
+        priority,
+        status,
+        assigneeId,
+      };
+      localStorage.setItem(TASK_FORM_STORAGE_KEY, JSON.stringify(formData));
+    }
+  };
+
+  // Функция для загрузки данных формы из localStorage
+  const loadFormData = () => {
+    if (!isEdit) {
+      const savedData = localStorage.getItem(TASK_FORM_STORAGE_KEY);
+      if (savedData) {
+        const parsedData = JSON.parse(savedData);
+        setTitle(parsedData.title || '');
+        setDescription(parsedData.description || '');
+        setBoardId(parsedData.boardId || '');
+        setPriority(parsedData.priority || TASK_PRIORITIES[1].value);
+        setStatus(parsedData.status || TASK_STATUSES[0].value);
+        setAssigneeId(parsedData.assigneeId || '');
+      }
+    }
+  };
+
+  // Эффект для заполнения формы данными задачи при редактировании или загрузки сохраненных данных
   useEffect(() => {
     if (isEdit && task) {
       setTitle(task.title);
@@ -55,14 +89,16 @@ export function TaskDrawer(props: TaskDrawerProps) {
       setStatus(task.status as TaskStatus);
       setAssigneeId(task.assignee?.id ?? '');
     } else {
-      setTitle('');
-      setDescription('');
-      setBoardId('');
-      setPriority(TASK_PRIORITIES[1].value);
-      setStatus(TASK_STATUSES[0].value);
-      setAssigneeId('');
+      loadFormData();
     }
   }, [isEdit, task, open]);
+
+  // Эффект для сохранения данных формы при изменении полей
+  useEffect(() => {
+    if (!isEdit) {
+      saveFormData();
+    }
+  }, [title, description, boardId, priority, status, assigneeId, isEdit]);
 
   // Обработчик отправки формы
   const handleSubmit = (e: React.FormEvent) => {
@@ -77,6 +113,19 @@ export function TaskDrawer(props: TaskDrawerProps) {
     };
     
     if (!validateTaskForm(formData, isEdit)) return;
+    
+    // Очищаем сохраненные данные после успешной отправки
+    if (!isEdit) {
+      localStorage.removeItem(TASK_FORM_STORAGE_KEY);
+      // Сбрасываем все поля формы
+      setTitle('');
+      setDescription('');
+      setBoardId('');
+      setPriority(TASK_PRIORITIES[1].value);
+      setStatus(TASK_STATUSES[0].value);
+      setAssigneeId('');
+    }
+    
     onSubmit(formData as TaskFormData);
   };
 
